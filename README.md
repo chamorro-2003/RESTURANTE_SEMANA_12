@@ -4,7 +4,7 @@
 
 # Universidad Estatal Amazonica (UEA)
 
-# Sistema de Gestión de Restaurante - Relaciones, Ventas y Persistencia de Datos en JSON
+# Sistema de Gestión de Restaurante - Optimización de Rendimiento mediante Colecciones
 
 **Estudiante:** Nayely Soledad Chamorro Vicente
 
