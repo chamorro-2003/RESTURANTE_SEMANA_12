@@ -14,13 +14,13 @@
 
 ## Descripción General del Sistema
 
-Este proyecto corresponde a una nueva versión del sistema **restaurante_app**, en la cual se incorporan relaciones entre diferentes entidades mediante el uso de **Programación Orientada a Objetos**, permitiendo gestionar productos, usuarios y ventas de una manera más organizada y cercana a un escenario real, además, el sistema incorpora el control de stock y el registro de las ventas realizadas, de manera que cada compra pueda relacionarse con un usuario y un producto específico, mientras que la información se conserva mediante archivos independientes en formato **JSON**, permitiendo recuperar los datos cuando la aplicación vuelve a ejecutarse.
+Este proyecto corresponde a una nueva versión del sistema **restaurante_app**, en la cual se incorporan mejoras orientadas a optimizar el rendimiento de las operaciones realizadas con productos, usuarios y ventas, manteniendo las listas como colecciones principales para almacenar y conservar la información en archivos **JSON**, mientras que se utilizan estructuras auxiliares como diccionarios y conjuntos para realizar búsquedas y validaciones de manera más rápida, evitando recorridos innecesarios y permitiendo que el sistema sea más eficiente conforme aumenta la cantidad de datos.
 
 ---
 
 ## Estructura del Proyecto
 
-El sistema se encuentra organizado en módulos para separar las responsabilidades y facilitar la comprensión del código, de manera que la carpeta llamada **datos** almacena la información persistente, la de **modelos** contiene las clases principales, en **servicios** se administra la lógica del sistema y el acceso a los archivos **JSON**, mientras que el archivo **main.py** funciona como punto de entrada y permite al usuario interactuar mediante un menú de consola.
+El sistema mantiene una organización modular que permite separar las responsabilidades de cada componente, de manera que la carpeta datos conserva la información mediante archivos **JSON**, modelos contiene las clases principales del sistema, servicios administra la lógica de negocio y las estructuras utilizadas para mejorar el rendimiento, mientras que **main.py** funciona como punto de entrada y permite al usuario interactuar con las diferentes opciones mediante la consola.
 
 ```text
 restaurante_app/
@@ -45,26 +45,26 @@ restaurante_app/
 ## Componentes Técnicos Aplicados
 ---
 
-## Responsabilidad de las Clases y Módulos
+## Mejoras de Rendimiento
 
-Cada componente del proyecto cumple una función determinada para evitar mezclar responsabilidades y facilitar el mantenimiento del sistema, por lo tanto, la clase **Producto** representa los artículos disponibles en el restaurante y administra información como su identificación, nombre, precio, categoría y cantidad disponible en stock, mientras que **Usuario** representa a las personas registradas y permite identificar a quienes realizan las compras, por otra parte, **Venta** relaciona un usuario con un producto y una cantidad adquirida, mientras que **Restaurante** administra las colecciones y aplica las reglas necesarias para realizar las diferentes operaciones del sistema.
+Para mejorar la velocidad de las operaciones, se incorporaron estructuras auxiliares en el archivo **restaurante.py**, por lo que el diccionario _indice_productos permite encontrar productos directamente mediante su **ID**, mientras que **_indice_usuarios** facilita la búsqueda de usuarios, además, **_indice_ventas_usuario** organiza las ventas según el usuario para consultar su historial sin recorrer todas las ventas, finalmente, los conjuntos **_ids_productos** y **_ids_usuarios** permiten comprobar rápidamente si un **ID** ya existe, evitando así registros duplicados y reduciendo recorridos innecesarios.
 
 ---
 
-## Flujo de Venta
+## Sincronización de Colecciones
 
-El proceso de venta comienza cuando el usuario selecciona el producto que desea comprar y proporciona su identificación, posteriormente, el sistema verifica que tanto el **usuario_id** como el **producto_id** existan en sus respectivas colecciones, luego se comprueba que la cantidad solicitada sea mayor que cero y que el producto tenga suficiente stock disponible, si todas las validaciones son correctas, se ejecuta **producto.vender(cantidad)** para disminuir las unidades disponibles, después se crea una nueva instancia de **Venta** con la información de la transacción y finalmente se actualizan los archivos **JSON**, permitiendo que el nuevo stock y la venta queden registrados de forma permanente.
+Las estructuras auxiliares deben mantenerse actualizadas para que siempre coincidan con las listas principales, por esta razón, cuando el sistema inicia y recupera la información desde los archivos **JSON**, se ejecuta **_reconstruir_indices()** para volver a crear los índices en memoria, posteriormente, cada vez que se registra un **producto**, **usuario** o **venta**, la información se incorpora tanto a las colecciones principales como a los índices correspondientes, garantizando que las búsquedas y validaciones trabajen con información actualizada durante toda la ejecución.
 
 ---
 
 ## Persistencia y Pruebas
 
-La persistencia permite que la información del sistema se conserve después de cerrar la aplicación, por lo que **productos.json** mantiene los productos y su stock actualizado, **usuarios.json** almacena los usuarios registrados y **ventas.json** conserva el historial de las transacciones realizadas, para comprobar este funcionamiento se registró un producto con 12 unidades de stock y se realizó ventas de los demás productos registrados, verificando que el stock disminuyera y que las ventas aparecieran en el archivo correspondiente, además, se realizó una prueba con una cantidad superior al stock disponible para comprobar que la operación fuera rechazada sin modificar los datos, finalmente, se reinició la aplicación y se verificó que la información permaneciera disponible y que el historial pudiera consultarse correctamente.
+Para comprobar las mejoras implementadas se inició el sistema con información previamente almacenada y se verificó que los productos y usuarios pudieran localizarse rápidamente mediante sus identificadores, posteriormente, se realizaron varias ventas para un mismo usuario y se consultó su historial utilizando el índice correspondiente, además, se intentó registrar productos y usuarios con **IDs** existentes para comprobar que los conjuntos rechazaran los duplicados, finalmente, se realizó una venta exitosa y se verificó que el stock se actualizara correctamente tanto en memoria como en **productos.json**, mientras que la nueva transacción quedara registrada en **ventas.json**.
 
 ---
 
 ## Reflexión Final
 
-La incorporación de relaciones entre entidades, control de inventario y persistencia en **JSON** permite que el sistema se aproxime cada vez más al funcionamiento de una aplicación real, ya que ahora no solamente se administran productos y usuarios, sino que también es posible relacionarlos mediante las ventas realizadas y conservar esta información después de cerrar el programa, además, la separación de responsabilidades facilita la comprensión del código y permite realizar cambios de manera más segura, fortaleciendo así el aprendizaje de **Programación Orientada a Objetos** y proporcionando una estructura preparada para incorporar nuevas funcionalidades en futuras versiones.
+La incorporación de diccionarios y conjuntos demuestra que la elección adecuada de las estructuras de datos puede mejorar considerablemente el funcionamiento de una aplicación, ya que permiten realizar búsquedas, validaciones y consultas de manera más eficiente sin modificar la estructura principal del sistema, de esta manera, las listas continúan siendo útiles para almacenar la información y mantener la persistencia, mientras que los índices auxiliares optimizan las operaciones más frecuentes, logrando un sistema más rápido, organizado y preparado para trabajar con una mayor cantidad de datos.
 
 <div>
