@@ -6,7 +6,6 @@ from servicios.archivo_servicio import ArchivoServicio
 
 # Función de mostrar menú
 def mostrar_menu() -> None:
-    """Muestra el menú usando una sola cadena multilínea formateada."""
     menu_texto = """
 =============================================
       SISTEMA DE GESTIÓN DE RESTAURANTE      
