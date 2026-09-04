@@ -1,0 +1,26 @@
+[
+    {
+        "venta_id": 1,
+        "usuario_id": "1104567890",
+        "producto_id": 1,
+        "cantidad": 2
+    },
+    {
+        "venta_id": 2,
+        "usuario_id": "1109876543",
+        "producto_id": 3,
+        "cantidad": 1
+    },
+    {
+        "venta_id": 3,
+        "usuario_id": "1104567890",
+        "producto_id": 2,
+        "cantidad": 1
+    },
+    {
+        "venta_id": 4,
+        "usuario_id": "1900542016",
+        "producto_id": 3,
+        "cantidad": 1
+    }
+]
